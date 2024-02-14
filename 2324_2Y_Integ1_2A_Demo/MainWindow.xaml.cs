@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace _2324_2Y_Integ1_2A_Demo
 {
     /// <summary>
@@ -22,8 +23,8 @@ namespace _2324_2Y_Integ1_2A_Demo
     public partial class MainWindow : Window
     {
         Button[] btnNums = new Button[10];
-        int num1 = 0;
-        int num2 = 0;
+        float num1 = 0;
+        float num2 = 0;
         int ope = -1;
 
         public MainWindow()
@@ -49,6 +50,8 @@ namespace _2324_2Y_Integ1_2A_Demo
             btnMult.Content = "x";
             btnDiv.Content = "/";
             btnEnter.Content = "=";
+            btnSqr.Content = "x^2";
+            btnSqrt.Content = "\u221A";
         }
 
         private void numberEnter(int x)
@@ -126,6 +129,23 @@ namespace _2324_2Y_Integ1_2A_Demo
             numberEnter(0);
 
         }
+        private void btnSqr_Click(object sender, RoutedEventArgs e)
+        {
+           num1 *= num1;
+           tbCalc.Text = num1.ToString();
+        }
+        private void btnSqrt_Click(object sender, RoutedEventArgs e)
+        {
+            double num1sqrt = Math.Sqrt(num1);
+            if (num1sqrt.ToString().Length < 5)
+            {
+                tbCalc.Text = num1sqrt.ToString();
+            }
+            else
+            {
+                tbCalc.Text = num1sqrt.ToString().Substring(1);
+            }
+        }
         #endregion
 
         #region OperationEvents
@@ -173,8 +193,15 @@ namespace _2324_2Y_Integ1_2A_Demo
             }
             
             if(ope > -1)
-            {
-                tbCalc.Text = num1.ToString();
+            { 
+                if (num1.ToString().Length < 5)
+                {
+                    tbCalc.Text = num1.ToString();
+                }
+                else
+                {
+                    tbCalc.Text = num1.ToString().Substring(0, 5);
+                }
                 ope = -1;
                 num2 = 0;
             }
