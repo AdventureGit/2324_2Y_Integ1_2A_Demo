@@ -23,8 +23,8 @@ namespace _2324_2Y_Integ1_2A_Demo
     public partial class MainWindow : Window
     {
         Button[] btnNums = new Button[10];
-        float num1 = 0;
-        float num2 = 0;
+        double num1 = 0;
+        double num2 = 0;
         int ope = -1;
 
         public MainWindow()
@@ -54,6 +54,28 @@ namespace _2324_2Y_Integ1_2A_Demo
             btnSqrt.Content = "\u221A";
         }
 
+        private void repeatchecker(double num1)
+        {
+            string nums = num1.ToString();
+            if (nums.Contains("."))
+            {
+                string[] numssplit = nums.Split('.');
+                for (int i = 0; i < numssplit.Length; i++)
+                {
+                    if (numssplit[1].Length > 5)
+                    {
+                        numssplit[1] = numssplit[1].Substring(0, 5);
+                    }
+                }
+                nums = numssplit[0] + "." + numssplit[1];
+                tbCalc.Text = nums;
+            }
+            else
+            {
+                tbCalc.Text = nums;
+            }
+        }
+
         private void numberEnter(int x)
         {
             string input = tbCalc.Text;
@@ -63,11 +85,23 @@ namespace _2324_2Y_Integ1_2A_Demo
                 input = input.Substring(1);
 
             if (ope == -1)
+            {
+
                 num1 = int.Parse(input);
+
+            }
+
             else
                 num2 = int.Parse(input);
 
             tbCalc.Text = input;
+        }
+        
+        private bool isnegativepositive()
+        {
+            //int inputnum = num * -1;
+            
+            return true;
         }
 
         #region KeypadEvents
@@ -129,23 +163,14 @@ namespace _2324_2Y_Integ1_2A_Demo
             numberEnter(0);
 
         }
-        private void btnSqr_Click(object sender, RoutedEventArgs e)
+        private void btnPosiNega_Click(object sender, RoutedEventArgs e)
         {
-           num1 *= num1;
-           tbCalc.Text = num1.ToString();
+            //isnegativepositive();
+            
+
+
         }
-        private void btnSqrt_Click(object sender, RoutedEventArgs e)
-        {
-            double num1sqrt = Math.Sqrt(num1);
-            if (num1sqrt.ToString().Length < 5)
-            {
-                tbCalc.Text = num1sqrt.ToString();
-            }
-            else
-            {
-                tbCalc.Text = num1sqrt.ToString().Substring(1);
-            }
-        }
+
         #endregion
 
         #region OperationEvents
@@ -171,7 +196,18 @@ namespace _2324_2Y_Integ1_2A_Demo
         {
             ope = 3;
             tbCalc.Text = "";
-        } 
+        }
+        private void btnSqrt_Click(object sender, RoutedEventArgs e)
+        {
+            num1 = Math.Sqrt(num1);
+            repeatchecker(num1);
+        }
+        private void btnSqr_Click(object sender, RoutedEventArgs e)
+        {
+            num1 *= num1;
+            repeatchecker(num1);
+            
+        }
         #endregion
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
@@ -193,15 +229,18 @@ namespace _2324_2Y_Integ1_2A_Demo
             }
             
             if(ope > -1)
-            { 
-                if (num1.ToString().Length < 5)
-                {
-                    tbCalc.Text = num1.ToString();
-                }
-                else
-                {
-                    tbCalc.Text = num1.ToString().Substring(0, 5);
-                }
+            {
+               // string nums = num1.ToString();
+                repeatchecker(num1);
+                
+                //if (num1.ToString().Length < 5)
+                //{
+                //    tbCalc.Text = num1.ToString();
+                //}
+                //else
+                //{
+                //    tbCalc.Text = num1.ToString().Substring(0, 5);
+                //}
                 ope = -1;
                 num2 = 0;
             }

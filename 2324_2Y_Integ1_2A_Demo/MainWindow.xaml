@@ -43,6 +43,8 @@
             Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnSqr_Click"/>
         <Button x:Name="btnSqrt" Content="X" HorizontalAlignment="Left" Margin="80,66,0,0" VerticalAlignment="Top" 
             Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnSqrt_Click"/>
+        <Button x:Name="btnPosiNega" Content="X" HorizontalAlignment="Left" Margin="26,287,0,0" VerticalAlignment="Top" 
+            Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnPosiNega_Click"/>
 
 
     </Grid>
